@@ -1,92 +1,120 @@
 <% layout('layouts/boilerplate') %>
 
-  <style>
-    .filters {
-      display: flex;
-      overflow-x: auto;
-      padding: 10px 0;
-      margin-bottom: 20px;
-      border-bottom: 1px solid #ddd;
-    }
+<style>
+  .filters {
+    display: flex;
+    overflow-x: auto;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    scrollbar-width: thin;
+  }
 
+  .filters::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .filters::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 3px;
+  }
+
+  .filter {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+    padding: 8px 12px;
+    background-color: #f8f9fa;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    white-space: nowrap;
+  }
+
+  .filter:hover {
+    background-color: #e2e6ea;
+    transform: scale(1.05);
+  }
+
+  .filter.active {
+    background-color: #007bff;
+    color: white;
+  }
+
+  /* Responsive adjustments for filters */
+  @media (max-width: 576px) {
     .filter {
-      flex: 0 0 auto;
-      display: flex;
-      align-items: center;
-      margin-right: 15px;
-      padding: 8px 12px;
-      background-color: #f8f9fa;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: background-color 0.3s, transform 0.2s;
+      padding: 6px 10px;
+      font-size: 0.9rem;
+      margin-right: 10px;
     }
-
-    .filter:hover {
-      background-color: #e2e6ea;
-      transform: scale(1.05);
+    
+    .filter i {
+      font-size: 0.8rem;
     }
+  }
+</style>
 
-    .filter.active {
-      background-color: #007bff;
-      color: white;
-    }
-  </style>
-
-  <body>
-    <div class="filters px-3">
-      <div class="filter active" data-category="All">
-        <div><i class="fa-solid fa-fire"></i></div>All
-      </div>
-      <div class="filter" data-category="Trending">
-        <div><i class="fa-solid fa-fire"></i></div>Trending
-      </div>
-      <div class="filter" data-category="Rooms">
-        <div><i class="fa-solid fa-bed"></i></div>Rooms
-      </div>
-      <div class="filter" data-category="Iconic Cities">
-        <div><i class="fa-solid fa-mountain-city"></i></div>Iconic Cities
-      </div>
-      <div class="filter" data-category="Mountains">
-        <div><i class="fa-solid fa-mountain"></i></div>Mountains
-      </div>
-      <div class="filter" data-category="Castles">
-        <div><i class="fa-solid fa-chess-rook"></i></div>Castles
-      </div>
-      <div class="filter" data-category="Amazing pools">
-        <div><i class="fa-solid fa-person-swimming"></i></div>Amazing Pools
-      </div>
-      <div class="filter" data-category="Camping">
-        <div><i class="fa-solid fa-campground"></i></div>Camping
-      </div>
-      <div class="filter" data-category="Farms">
-        <div><i class="fa-solid fa-cow"></i></div>Farms
-      </div>
-      <div class="filter" data-category="Arctic">
-        <div><i class="fa-solid fa-star-of-life"></i></div>Arctic
-      </div>
-      <div class="filter" data-category="Domes">
-        <div><i class="fa-solid fa-igloo"></i></div>Domes
-      </div>
-      <div class="filter" data-category="Boats">
-        <div><i class="fa-solid fa-sailboat"></i></div>Boats
-      </div>
+<div class="container-fluid">
+  <div class="filters px-3">
+    <div class="filter active" data-category="All">
+      <div><i class="fa-solid fa-fire"></i></div>All
     </div>
+    <div class="filter" data-category="Trending">
+      <div><i class="fa-solid fa-fire"></i></div>Trending
+    </div>
+    <div class="filter" data-category="Rooms">
+      <div><i class="fa-solid fa-bed"></i></div>Rooms
+    </div>
+    <div class="filter" data-category="Iconic Cities">
+      <div><i class="fa-solid fa-mountain-city"></i></div>Iconic Cities
+    </div>
+    <div class="filter" data-category="Mountains">
+      <div><i class="fa-solid fa-mountain"></i></div>Mountains
+    </div>
+    <div class="filter" data-category="Castles">
+      <div><i class="fa-solid fa-chess-rook"></i></div>Castles
+    </div>
+    <div class="filter" data-category="Amazing pools">
+      <div><i class="fa-solid fa-person-swimming"></i></div>Amazing Pools
+    </div>
+    <div class="filter" data-category="Camping">
+      <div><i class="fa-solid fa-campground"></i></div>Camping
+    </div>
+    <div class="filter" data-category="Farms">
+      <div><i class="fa-solid fa-cow"></i></div>Farms
+    </div>
+    <div class="filter" data-category="Arctic">
+      <div><i class="fa-solid fa-star-of-life"></i></div>Arctic
+    </div>
+    <div class="filter" data-category="Domes">
+      <div><i class="fa-solid fa-igloo"></i></div>Domes
+    </div>
+    <div class="filter" data-category="Boats">
+      <div><i class="fa-solid fa-sailboat"></i></div>Boats
+    </div>
+  </div>
 
-    <div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1">
-      <% for (list of data) { %>
-        <div class="card "> <a href="/listing/<%=list._id %>" class="listing-link"> <img src="<%= list.image.url %>"
-              class="card-img-top" alt="listing image" style="height:20rem">
+  <div class="row g-4 px-2">
+    <% for (list of data) { %>
+      <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="card h-100">
+          <a href="/listing/<%=list._id %>" class="listing-link">
+            <img src="<%= list.image.url %>" class="card-img-top" alt="listing image">
             <div class="card-img-overlay"></div>
-            <div class="card-body">
-              <p class="card-text"> <b>
-                  <%= list.title %>
-                </b> <br>
-                <%= list.price.toLocaleString('en-US') %> per night
+            <div class="card-body d-flex flex-column">
+              <p class="card-text flex-grow-1">
+                <b><%= list.title %></b><br>
+                ₹<%= list.price.toLocaleString('en-IN') %> per night
               </p>
-          </a> </div>
-    </div>
-    <% } %> </a> </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    <% } %>
+  </div>
+</div>
 
-      <!-- Load script from public/js -->
-      <script src="/javascript/filters.js"></script>
-  </body>
+<!-- Load script from public/js -->
+<script src="/javascript/filters.js"></script>

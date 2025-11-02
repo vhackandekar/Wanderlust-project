@@ -1,6 +1,12 @@
 <% layout('layouts/boilerplate') %>
-<div class="dashboard mt-4">
-  <h1>Welcome, <%= user.username %> 🎉</h1>
-  <p>You are logged in successfully.</p>
-  <a href="/logout" class="btn btn-secondary">Logout</a>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+      <div class="dashboard text-center p-4">
+        <h1>Welcome, <%= user.username %> 🎉</h1>
+        <p class="mb-4">You are logged in successfully.</p>
+        <a href="/logout" class="btn btn-secondary">Logout</a>
+      </div>
+    </div>
+  </div>
 </div>

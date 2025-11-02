@@ -4,8 +4,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   margin: 0;
+  padding: 20px;
 }
 
 .auth-container, .dashboard {
@@ -14,7 +15,8 @@ body {
   border-radius: 16px;
   box-shadow: 0 6px 12px rgba(0,0,0,0.15);
   text-align: center;
-  width: 320px;
+  width: 100%;
+  max-width: 400px;
 }
 
 h2, h1 {
@@ -23,11 +25,12 @@ h2, h1 {
 }
 
 input {
-  width: 90%;
+  width: 100%;
   padding: 10px;
   margin: 8px 0;
   border-radius: 8px;
   border: 1px solid #ccc;
+  box-sizing: border-box;
 }
 
 button {
@@ -38,6 +41,8 @@ button {
   border-radius: 8px;
   cursor: pointer;
   transition: 0.3s;
+  width: 100%;
+  font-size: 1rem;
 }
 
 button:hover {
@@ -57,4 +62,29 @@ button:hover {
 
 .logout-btn:hover {
   background: #ff1744;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+  body {
+    padding: 15px;
+  }
+  
+  .auth-container, .dashboard {
+    padding: 30px 20px;
+    max-width: 100%;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+  }
+  
+  h2 {
+    font-size: 1.3rem;
+  }
+  
+  input, button {
+    padding: 12px;
+    font-size: 1rem;
+  }
 }
