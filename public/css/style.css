@@ -1,0 +1,168 @@
+body{
+   
+     font-family: "Plus Jakarta Sans", sans-serif !important;
+     display: flex;
+     flex-direction: column;
+     min-height: 100vh;
+}
+.container{
+    flex: 1;
+}
+.navbar{
+    height: 5rem;
+    background-color: white;
+}
+.fa-compass{
+    color: #fe424d;
+    font-size: 2rem;
+}
+.nav-link{
+    color: #222222 !important;
+}
+.f-info-link a{
+    text-decoration: none;
+    color: #222222;
+}
+.f-info-link a:hover{
+    text-decoration: underline;
+    
+}
+.f-info-link ,.f-info-socials, .f-info-brand{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.f-info-socials i{
+   margin-right: 1rem;
+   font-size: 1.2rem;
+   
+}
+
+
+.f-info{
+    height: 8rem;
+    display: flex;
+    background-color: #ebebeb;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: space-evenly;
+    text-align: center;
+}
+/* stylling for cards */
+.card{
+    border: none !important;
+    margin-bottom: 2rem;
+}
+.card-img-top{
+  border-radius: 1rem !important;
+  width: 100% !important;
+  object-fit: cover !important;
+}
+.card-body{
+    padding: 0 !important;
+}
+.card-text p{
+    font-weight: 400 !important;
+
+}
+.listing-link {
+    text-decoration: none;
+    color: black;
+}
+.card-img-overlay{
+    opacity: 0;
+
+}
+.card-img-overlay:hover{
+    opacity: 0.2;
+    background-color: white;
+}
+.add-btn,.btn-edit{
+    background-color: #fe424d !important;
+    border: none !important;
+}
+.show-card {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s;
+}
+
+.show-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+.show-img {
+  height: 300px;
+  object-fit: cover;
+}
+
+/* === Review Section Styling === */
+.star-rating {
+  direction: rtl;
+  display: inline-flex;
+  gap: 5px;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.2s ease-in-out;
+}
+
+.star-rating input {
+  display: none;
+}
+
+.star-rating label {
+  font-size: 2rem;
+  color: #e4e5e9;
+  transition: color 0.2s, transform 0.15s;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  color: #ffc107;
+  transform: scale(1.1);
+}
+
+.star-rating input:checked ~ label {
+  color: #ffc107;
+}
+
+/* Animation feedback after selecting */
+.star-rating.selected label {
+  animation: bounce 0.3s ease-in-out;
+}
+
+@keyframes bounce {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* Review form card look */
+#reviewForm {
+  background: #f9fafc;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+
+/* review display Styling */
+.review-card {
+  border: 1px solid #eaeaea;
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  background: linear-gradient(145deg, #ffffff, #f7f7f7);
+}
+.review-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+.card-text {
+  font-size: 1rem;
+  color: #333;
+}
+.review-card small {
+  color: #6c757d;
+}
+
