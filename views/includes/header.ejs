@@ -9,6 +9,8 @@
   display: flex;
   align-items: center;
   transition: background-color 0.3s;
+  white-space: nowrap;
+  min-height: 40px; /* Better touch target */
 }
 
 .search-btn:hover {
@@ -18,10 +20,11 @@
 
 .search-input {
   border-radius: 2rem;
-  padding: 6px 12px;
+  padding: 8px 12px;
   border: 1px solid #ccc;
-  width: 100%; /* Changed for responsiveness */
-  max-width: 250px; /* Added max-width */
+  width: 100%;
+  max-width: 250px;
+  font-size: 1rem;
 }
 
 /* Responsive styles for search form */
@@ -30,16 +33,59 @@
     width: 100%;
     max-width: none;
     margin-bottom: 10px;
+    padding: 10px 15px;
+    font-size: 1rem;
   }
   
   .navbar-nav.ms-auto {
     margin-top: 10px;
+    width: 100%;
   }
+  
+  .search-btn {
+    padding: 10px 15px;
+    justify-content: center;
+    font-size: 1rem;
+    min-height: 44px; /* Minimum touch target size */
+  }
+  
+  .d-flex.flex-column.flex-md-row {
+    width: 100%;
+  }
+  
+  /* Ensure the search form takes full width on mobile */
+  .navbar-nav.ms-auto > .d-flex {
+    width: 100%;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 576px) {
+  .search-input {
+    padding: 12px 15px;
+    font-size: 1.1rem;
+  }
+  
+  .search-btn {
+    padding: 12px 15px;
+    font-size: 1.1rem;
+  }
+}
+
+/* Improve navbar collapse behavior */
+.navbar-collapse {
+  margin-top: 10px;
+}
+
+/* Ensure navbar items are properly spaced on mobile */
+.navbar-nav .nav-link {
+  padding: 8px 0;
+  margin: 5px 0;
 }
 </style>
 
 <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
-  <div class="container-fluid"> <!-- Changed to container-fluid -->
+  <div class="container-fluid">
     <a class="navbar-brand" href="/listing"><i class="fa-regular fa-compass"></i></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -48,10 +94,10 @@
       <div class="navbar-nav">
         <a class="nav-link" href="/listing">Explore</a> 
       </div>
-      <div class="navbar-nav ms-auto">
-        <form class="d-flex flex-column flex-md-row gap-2" role="search" action="/listing/search" method="get">
+      <div class="navbar-nav ms-auto" style="max-width: 500px; width: 100%;">
+        <form class="d-flex flex-column flex-md-row gap-2 w-100" role="search" action="/listing/search" method="get">
           <input class="form-control search-input" type="search" placeholder="Search" aria-label="Search" name="query" />
-          <button class="btn search-btn" type="submit"> <i class="fa-solid fa-magnifying-glass"></i> Search</button>
+          <button class="btn search-btn" type="submit"> <i class="fa-solid fa-magnifying-glass me-2"></i> Search</button>
         </form>
       </div>
       <div class="navbar-nav ms-auto">

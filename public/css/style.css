@@ -12,6 +12,7 @@ body{
 }
 .container-fluid {
     padding: 0 15px; /* Added padding for smaller screens */
+    flex: 1;
 }
 .navbar{
     height: auto; /* Changed from fixed height */
@@ -58,6 +59,11 @@ body{
     align-items: center; /* Changed from space-evenly */
     text-align: center;
     padding: 1rem 0; /* Added padding */
+    margin-top: auto; /* Push footer to bottom */
+}
+
+footer {
+    margin-top: auto; /* Push footer to bottom */
 }
 
 /* Responsive footer adjustments */

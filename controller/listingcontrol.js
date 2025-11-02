@@ -29,8 +29,6 @@ module.exports.listingsBySearch=async (req, res) => {
   }
 }
 
-
-
 module.exports.createListing=async(req,res)=>{
    const {title,description,price,category,location,country}=req.body;
    const url=req.file.path;
@@ -99,41 +97,35 @@ module.exports.listEdit=async(req,res)=>{
      req.flash('success','Listing updated successfully');
     res.redirect(`/listing/${id}`);
 }
-module.exports.deleteList=async (req,res)=>{
+module.exports.deleteList=async(req,res)=>{
     const id=req.params.id;
-    await listing.findByIdAndDelete(id);
+    const data=await listing.findByIdAndDelete(id);
     req.flash('success','Listing deleted successfully');
-    res.redirect("/listing");
+    res.redirect('/listing');
 }
 module.exports.createReview=async(req,res)=>{
-    const listingId = req.params.id;
-    const {rating,comment}=req.body;
-    const review=await Review.create({
-        Comment: comment,
-        Rating: rating,
-        author: req.user._id
-    });
-    const listingDoc = await listing.findById(listingId);
-    
-    listingDoc.reviews.push(review);
-    await listingDoc.save();
-    req.flash('success','Review added successfully');
-    res.redirect(`/listing/${listingId}`);
-}
-module.exports.deleteReview=async (req, res) => {
-    const { id, reviewId } = req.params;
-
-    // Remove review reference from listing
-    await listing.findByIdAndUpdate(id, {
-        $pull: { reviews: reviewId }
-    });
-
-    // Delete the actual review document
-    await Review.findByIdAndDelete(reviewId);
-    req.flash('success','Review deleted successfully');
-
+    const id=req.params.id;
+    const data=await listing.findById(id);
+    const {Rating,Comment}=req.body;
+    const newReview=await Review.create({
+        Rating,
+        Comment,
+        author:req.user._id
+    })
+    data.reviews.push(newReview);
+    await data.save();
+    await newReview.save();
+    req.flash('success','Review created successfully');
     res.redirect(`/listing/${id}`);
 }
+module.exports.deleteReview=async(req,res)=>{
+    const {id,reviewId}=req.params;
+    await listing.findByIdAndUpdate(id,{$pull:{reviews:reviewId}});
+    await Review.findByIdAndDelete(reviewId);
+    req.flash('success','Review deleted successfully');
+    res.redirect(`/listing/${id}`);
+}
+
 module.exports.filterListings = async (req, res) => {
   try {
     const { category } = req.query;
