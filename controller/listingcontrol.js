@@ -106,10 +106,10 @@ module.exports.deleteList=async(req,res)=>{
 module.exports.createReview=async(req,res)=>{
     const id=req.params.id;
     const data=await listing.findById(id);
-    const {Rating,Comment}=req.body;
+    const {rating,comment}=req.body;
     const newReview=await Review.create({
-        Rating,
-        Comment,
+        rating,
+        comment,
         author:req.user._id
     })
     data.reviews.push(newReview);
@@ -138,7 +138,7 @@ module.exports.filterListings = async (req, res) => {
 
       // Compute average rating + review count + trend score
       const trendingListings = allListings.map(list => {
-        const ratings = list.reviews.map(r => r.Rating);
+        const ratings = list.reviews.map(r => r.rating);
         const avgRating = ratings.length
           ? ratings.reduce((a, b) => a + b, 0) / ratings.length
           : 0;
